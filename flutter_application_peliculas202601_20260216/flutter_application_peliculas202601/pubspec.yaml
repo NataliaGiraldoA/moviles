@@ -38,6 +38,8 @@ dependencies:
   fan_carousel_image_slider: any
   flutter_carousel_slider: ^1.1.0
   appinio_swiper: any
+  http: ^1.6.0
+  provider: ^6.1.5+1
 
 dev_dependencies:
   flutter_test:

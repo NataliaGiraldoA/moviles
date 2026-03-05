@@ -2,32 +2,42 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:appinio_swiper/appinio_swiper.dart';
 
-class TinderSwiper extends StatelessWidget {
-  const TinderSwiper({super.key});
+import '../models/models.dart';
 
-  static const List<String> images = [
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-  ];
+class TinderSwiper extends StatelessWidget {
+  final List<Movie> movies;
+
+  const TinderSwiper({super.key, required this.movies});
 
   @override
   Widget build(BuildContext context) {
+    if (movies.isEmpty) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height * 0.75,
+        child: const Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return CupertinoPageScaffold(
       child: SizedBox(
-        height: MediaQuery
-            .of(context)
-            .size
-            .height * 0.75,
+        height: MediaQuery.of(context).size.height * 0.75,
         child: AppinioSwiper(
-          cardCount: images.length,
+          cardCount: movies.length,
           cardBuilder: (BuildContext context, int index) {
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: NetworkImage(images[index % images.length]),
-                  fit: BoxFit.cover,
+            final movie = movies[index % movies.length];
+            movie.heroId = 'tinder-${movie.id}';
+            return GestureDetector(
+              onTap: () => Navigator.pushNamed(context, 'detail', arguments: movie),
+              child: Hero(
+                tag: movie.heroId!,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                      image: NetworkImage(movie.fullPosterImg),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             );

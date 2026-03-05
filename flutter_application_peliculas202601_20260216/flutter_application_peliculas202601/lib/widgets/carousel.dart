@@ -2,21 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 
 class Carousel extends StatelessWidget {
-  const Carousel({super.key});
+  final List<String> images;
 
-  static const List<String> images = [
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-    'https://tse1.explicit.bing.net/th/id/OIP.1ZaFpKFhAFSHLuFo6Zaa5gHaFj?rs=1&pid=ImgDetMain&o=7&rm=3',
-  ];
+  const Carousel({super.key, required this.images});
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    if (images.isEmpty) {
+     return SizedBox(
+       width: double.infinity,
+       height: size.height * 0.5,
+       child: Center(child: CircularProgressIndicator()),
+     );
+   }
+
     return SizedBox(
-      height: 400,
+      width: double.infinity,
+      height: size.height * 0.5,
       child: CarouselSlider.builder(
         slideBuilder: (int index) {
-          return Image.network(images[index % images.length], fit: BoxFit.cover);
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/no-image.jpg'),
+              image: NetworkImage(images[index % images.length]),
+              fit: BoxFit.cover,
+            ),
+          );
         },
         itemCount: images.length,
         slideTransform: const CubeTransform(),

@@ -1,9 +1,31 @@
 //mateapp
 import 'package:flutter/material.dart';
+import 'package:flutter_application_peliculas202601/providers/movie_provider.dart';
+import 'package:flutter_application_peliculas202601/providers/ricky_morty_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'screens/screens.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const AppState());
+
+class AppState extends StatelessWidget {
+ const AppState({super.key});
+
+
+ @override
+ Widget build(BuildContext context) {
+
+
+   return MultiProvider(providers:[
+     ChangeNotifierProvider(create: (_) => RickMortyProvider(), lazy: false,),
+     ChangeNotifierProvider(create: (_) => MoviesProvider(), lazy: false,),
+   ],
+   child: MyApp(),
+   );
+   //return const Placeholder();
+ }
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

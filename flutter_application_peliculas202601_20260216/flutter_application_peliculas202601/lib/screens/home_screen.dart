@@ -1,6 +1,9 @@
 //stle
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_peliculas202601/providers/movie_provider.dart';
+import 'package:flutter_application_peliculas202601/providers/ricky_morty_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/widgets.dart';
 
@@ -9,7 +12,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //return Container();
+    final characterProvider = Provider.of<RickMortyProvider>(context);
+    final moviesProvider = Provider.of<MoviesProvider>(context);
+    final imageUrls = characterProvider.onDisplayCharacter
+        .map((c) => c.image)
+        .toList();
+
+    final imageMovieUrls = moviesProvider.onDisplayMovies
+        .map((c) => c.fullPosterImg)
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -18,25 +29,19 @@ class HomeScreen extends StatelessWidget {
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
       ),
 
-      /*
-      body: Center(
-        child: Text('Home Screen')
-      )
-      */
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //Text('Encabezado - Swiper'),
-            CardSwiper(),
+            CardSwiper(movies: moviesProvider.onDisplayMovies),
 
             Text('Detalle'),
-            FanCarousel(),
+            FanCarousel(movies: moviesProvider.popularMovies),
 
             Text('Detalle1'),
-            Carousel(),
+            Carousel(images: imageUrls),
 
             Text('Detalle2'),
-            TinderSwiper(),
+            TinderSwiper(movies: moviesProvider.upcomingMovies),
 
           ],
         ),
