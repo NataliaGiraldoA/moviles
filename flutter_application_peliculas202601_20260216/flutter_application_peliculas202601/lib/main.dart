@@ -50,10 +50,28 @@ class MyApp extends StatelessWidget {
         'list': (_) => ListviewScreen(),
       },
 
-      theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.indigo,
-        )
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF0D0D0D),
+        colorScheme: ColorScheme.dark(
+          primary: const Color(0xFFE040FB),
+          secondary: const Color(0xFFE040FB),
+          surface: const Color(0xFF1A1A2E),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF1A1A2E),
+          elevation: 0,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
+          ),
+          iconTheme: IconThemeData(color: Color(0xFFE040FB)),
+        ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Color(0xFFE040FB),
+        ),
       ),
 
 

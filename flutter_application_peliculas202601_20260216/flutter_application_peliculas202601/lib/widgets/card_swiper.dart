@@ -95,7 +95,7 @@ class CardSwiper extends StatelessWidget {
      return SizedBox(
        width: double.infinity,
        height: size.height * 0.5,
-       child: Center(child: CircularProgressIndicator()),
+       child: const Center(child: CircularProgressIndicator(color: Color(0xFFE040FB))),
      );
    }
 
@@ -124,12 +124,25 @@ class CardSwiper extends StatelessWidget {
                Navigator.pushNamed(context, 'detail', arguments: movie),
            child: Hero(
              tag: movie.heroId!,
-             child: ClipRRect(
-               borderRadius: BorderRadius.circular(20),
-               child: FadeInImage(
-                 placeholder: AssetImage('assets/no-image.jpg'),
-                 image: NetworkImage(movie.fullPosterImg),
-                 fit: BoxFit.cover,
+             child: Container(
+               decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(20),
+                 boxShadow: [
+                   BoxShadow(
+                     color: const Color(0xFFE040FB).withValues(alpha: 0.25),
+                     blurRadius: 20,
+                     spreadRadius: 1,
+                     offset: const Offset(0, 8),
+                   ),
+                 ],
+               ),
+               child: ClipRRect(
+                 borderRadius: BorderRadius.circular(20),
+                 child: FadeInImage(
+                   placeholder: const AssetImage('assets/no-image.jpg'),
+                   image: NetworkImage(movie.fullPosterImg),
+                   fit: BoxFit.cover,
+                 ),
                ),
              ),
            ),

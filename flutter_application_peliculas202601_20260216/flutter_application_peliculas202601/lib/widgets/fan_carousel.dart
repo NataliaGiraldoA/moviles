@@ -29,7 +29,7 @@ class _FanCarouselState extends State<FanCarousel> {
     if (widget.movies.isEmpty) {
       return const SizedBox(
         height: 400,
-        child: Center(child: CircularProgressIndicator()),
+        child: Center(child: CircularProgressIndicator(color: Color(0xFFE040FB))),
       );
     }
 

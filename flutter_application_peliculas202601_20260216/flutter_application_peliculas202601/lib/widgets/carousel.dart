@@ -14,7 +14,7 @@ class Carousel extends StatelessWidget {
      return SizedBox(
        width: double.infinity,
        height: size.height * 0.5,
-       child: Center(child: CircularProgressIndicator()),
+       child: const Center(child: CircularProgressIndicator(color: Color(0xFFE040FB))),
      );
    }
 
