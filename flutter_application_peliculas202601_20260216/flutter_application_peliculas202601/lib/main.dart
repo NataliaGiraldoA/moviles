@@ -48,6 +48,8 @@ class MyApp extends StatelessWidget {
         'home': (_) => HomeScreen(),
         'detail': (_) => DetailsScreen(),
         'list': (_) => ListviewScreen(),
+        'seasons': (_) => SeasonsScreen(),
+        'episodes': (_) => EpisodesScreen(),
       },
 
       theme: ThemeData.dark().copyWith(

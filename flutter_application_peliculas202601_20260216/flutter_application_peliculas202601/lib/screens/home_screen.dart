@@ -37,19 +37,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         centerTitle: true,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              color: const Color(0xFFE040FB).withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search_rounded, color: Color(0xFFE040FB)),
-            ),
-          ),
-        ],
+        actions: const [],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -73,6 +61,34 @@ class HomeScreen extends StatelessWidget {
             // --- Personajes ---
             _SectionHeader(icon: Icons.people_rounded, title: 'PERSONAJES'),
             Carousel(images: imageUrls),
+
+            const SizedBox(height: 10),
+
+            // --- Rick y Morty Temporadas ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pushNamed(context, 'seasons'),
+                  icon: const Icon(Icons.tv_rounded),
+                  label: const Text('Rick y Morty - Temporadas'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFE040FB),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
 
             const SizedBox(height: 10),
 

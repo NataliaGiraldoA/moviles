@@ -1,13 +1,12 @@
-import 'dart:async';
+import 'dart:convert';
 
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
-import 'package:flutter_application_peliculas202601/helpers/debouncer.dart';
 import 'package:flutter_application_peliculas202601/models/models.dart';
-import 'package:flutter_application_peliculas202601/models/search_response.dart';
+import 'package:flutter_application_peliculas202601/models/tv_season.dart';
 
 
 class MoviesProvider extends ChangeNotifier {
@@ -37,17 +36,6 @@ class MoviesProvider extends ChangeNotifier {
  Map<int, List<Cast>> moviesCast = {};
   
  int _popularPage = 0;
-
-
-  final debouncer = Debouncer(
-   duration: Duration( milliseconds: 500 ),
- );
-
-
- final StreamController<List<Movie>> _suggestionStreamContoller = StreamController.broadcast();
- Stream<List<Movie>> get suggestionStream => _suggestionStreamContoller.stream;
-
-
 
 
  MoviesProvider() {
@@ -132,44 +120,20 @@ class MoviesProvider extends ChangeNotifier {
  }
 
 
- Future<List<Movie>> searchMovies( String query ) async {
-
-
-   final url = Uri.https( _baseUrl, '3/search/movie', {
-     'api_key': _apiKey,
-     'language': _language,
-     'query': query
-   });
-
-
-   final response = await http.get(url);
-   final searchResponse = SearchResponse.fromJson( response.body );
-
-
-   return searchResponse.results;
+ Future<List<TvSeason>> getRickAndMortySeasons() async {
+   final jsonData = await _getJsonData('3/tv/60625');
+   final Map<String, dynamic> decoded = json.decode(jsonData);
+   final seasons = List<TvSeason>.from(
+     decoded['seasons'].map((x) => TvSeason.fromMap(x)),
+   );
+   return seasons;
  }
 
 
- void getSuggestionsByQuery( String searchTerm ) {
-
-
-   debouncer.value = '';
-   debouncer.onValue = ( value ) async {
-     // print('Tenemos valor a buscar: $value');
-     final results = await searchMovies(value);
-     _suggestionStreamContoller.add( results );
-   };
-
-
-   final timer = Timer.periodic(Duration(milliseconds: 300), ( _ ) {
-     debouncer.value = searchTerm;
-   });
-
-
-   Future.delayed(Duration( milliseconds: 301)).then(( _ ) => timer.cancel());
+ Future<TvSeasonDetail> getRickAndMortySeason(int seasonNumber) async {
+   final jsonData = await _getJsonData('3/tv/60625/season/$seasonNumber');
+   return TvSeasonDetail.fromJson(jsonData);
  }
-
-
 
 
 }
