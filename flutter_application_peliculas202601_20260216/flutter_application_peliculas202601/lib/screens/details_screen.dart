@@ -242,7 +242,7 @@ class _InfoChip extends StatelessWidget {
   }
 }
 
-// ─── TARJETA GLASS CON ESTADÍSTICAS ──────────────────────────────────────────
+
 class _GlassInfoCard extends StatelessWidget {
   final Movie movie;
   const _GlassInfoCard({required this.movie});
@@ -327,7 +327,6 @@ class _StatItem extends StatelessWidget {
   }
 }
 
-// ─── RATING CIRCULAR ─────────────────────────────────────────────────────────
 class _CircularRating extends StatelessWidget {
   final Movie movie;
   const _CircularRating({required this.movie});
@@ -437,7 +436,7 @@ class _RatingPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-// ─── SINOPSIS ESTILIZADA ─────────────────────────────────────────────────────
+
 class _StylizedOverview extends StatelessWidget {
   final Movie movie;
   const _StylizedOverview({required this.movie});
@@ -501,7 +500,7 @@ class _StylizedOverview extends StatelessWidget {
   }
 }
 
-// ─── CAST CON DISEÑO CINEMÁTICO ──────────────────────────────────────────────
+
 class _CinematicCastList extends StatelessWidget {
   final int movieId;
   const _CinematicCastList({required this.movieId});

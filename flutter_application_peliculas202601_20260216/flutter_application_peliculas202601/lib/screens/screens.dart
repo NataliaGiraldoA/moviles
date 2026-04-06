@@ -3,4 +3,8 @@ export 'package:flutter_application_peliculas202601/screens/home_screen.dart';
 export 'package:flutter_application_peliculas202601/screens/listview_screen.dart';
 export 'package:flutter_application_peliculas202601/screens/seasons_screen.dart';
 export 'package:flutter_application_peliculas202601/screens/episodes_screen.dart';
-
+export 'package:flutter_application_peliculas202601/screens/login_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/usuario_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/heroes_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/create_heros_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/edit_hero_screen.dart';

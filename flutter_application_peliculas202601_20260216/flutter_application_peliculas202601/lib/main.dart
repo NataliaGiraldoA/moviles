@@ -1,31 +1,32 @@
 //mateapp
 import 'package:flutter/material.dart';
+import 'package:flutter_application_peliculas202601/providers/hero_provider.dart';
 import 'package:flutter_application_peliculas202601/providers/movie_provider.dart';
 import 'package:flutter_application_peliculas202601/providers/ricky_morty_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/screens.dart';
+import 'services/services.dart';
 
 void main() => runApp(const AppState());
 
 class AppState extends StatelessWidget {
- const AppState({super.key});
+  const AppState({super.key});
 
-
- @override
- Widget build(BuildContext context) {
-
-
-   return MultiProvider(providers:[
-     ChangeNotifierProvider(create: (_) => RickMortyProvider(), lazy: false,),
-     ChangeNotifierProvider(create: (_) => MoviesProvider(), lazy: false,),
-   ],
-   child: MyApp(),
-   );
-   //return const Placeholder();
- }
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => RickMortyProvider(), lazy: false),
+        ChangeNotifierProvider(create: (_) => MoviesProvider(), lazy: false),
+        ChangeNotifierProvider(create: (_) => AuthService(), lazy: false),
+        ChangeNotifierProvider(create: (_) => HeroService(), lazy: false),
+      ],
+      child: MyApp(),
+    );
+    //return const Placeholder();
+  }
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -33,15 +34,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       //Quite el debug mode
       debugShowCheckedModeBanner: false,
+
+      scaffoldMessengerKey: NotificationsService.messengerKey,
 
       //Cambie el Titulo
       title: 'Peliculas App',
 
       //Defino el Screen Inicial
-      initialRoute: 'home',
+      initialRoute: 'login',
 
       //Defino las Rutas posibles de mi aplicacion
       routes: {
@@ -50,6 +52,17 @@ class MyApp extends StatelessWidget {
         'list': (_) => ListviewScreen(),
         'seasons': (_) => SeasonsScreen(),
         'episodes': (_) => EpisodesScreen(),
+        'login': (_) => LoginScreen(),
+        'usuario': (_) => UsuarioScreen(),
+        'heroes': (_) => HeroesScreen(),
+        'createHero': (_) => ChangeNotifierProvider(
+          create: (_) => HeroProvider(),
+          child: const CreateHerosScreen(),
+        ),
+        'editHero': (_) => ChangeNotifierProvider(
+          create: (_) => HeroProvider(),
+          child: const EditHeroScreen(),
+        ),
       },
 
       theme: ThemeData.dark().copyWith(
@@ -76,7 +89,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-
       /*
       home: Scaffold(
         appBar: AppBar(
@@ -90,4 +102,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_peliculas202601/providers/movie_provider.dart';
 import 'package:flutter_application_peliculas202601/providers/ricky_morty_provider.dart';
+import 'package:flutter_application_peliculas202601/services/services.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/widgets.dart';
@@ -12,18 +13,38 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final characterProvider = Provider.of<RickMortyProvider>(context);
     final moviesProvider = Provider.of<MoviesProvider>(context);
-    final imageUrls =
-        characterProvider.onDisplayCharacter.map((c) => c.image).toList();
+    final imageUrls = characterProvider.onDisplayCharacter
+        .map((c) => c.image)
+        .toList();
+
+    final authService = Provider.of<AuthService>(context, listen: false);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.login_outlined, color: Colors.white),
+          onPressed: () => {
+            authService.logout(),
+            Navigator.pushReplacementNamed(context, 'login'),
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Sesión cerrada'),
+                backgroundColor: Color(0xFFE040FB),
+              ),
+            ),
+          },
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.movie_filter_rounded, color: Color(0xFFE040FB), size: 26),
+            Icon(
+              Icons.movie_filter_rounded,
+              color: Color(0xFFE040FB),
+              size: 26,
+            ),
             SizedBox(width: 8),
             Text(
               'CINES',
@@ -47,7 +68,10 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 100),
 
             // --- En Cartelera ---
-            _SectionHeader(icon: Icons.local_fire_department_rounded, title: 'EN CARTELERA'),
+            _SectionHeader(
+              icon: Icons.local_fire_department_rounded,
+              title: 'EN CARTELERA',
+            ),
             CardSwiper(movies: moviesProvider.onDisplayMovies),
 
             const SizedBox(height: 10),
@@ -76,6 +100,32 @@ class HomeScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFE040FB),
                     foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    textStyle: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pushNamed(context, 'heroes'),
+                  icon: const Icon(Icons.shield_rounded),
+                  label: const Text('CRUD de Heroes'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF1A1A2E),
+                    foregroundColor: const Color(0xFFE040FB),
+                    side: const BorderSide(color: Color(0xFFE040FB), width: 1),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
