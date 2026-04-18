@@ -37,6 +37,19 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.qr_code_scanner_rounded,
+                color: Color(0xFFE040FB)),
+            tooltip: 'Escanear QR',
+            onPressed: () => Navigator.pushNamed(context, 'scanQr'),
+          ),
+          IconButton(
+            icon: const Icon(Icons.history_rounded, color: Colors.white),
+            tooltip: 'Mis lecturas',
+            onPressed: () => Navigator.pushNamed(context, 'qrHistory'),
+          ),
+        ],
         title: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -58,7 +71,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         centerTitle: true,
-        actions: const [],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
