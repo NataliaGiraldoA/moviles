@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../models/qr_movie.dart';
 import '../services/services.dart';
@@ -149,19 +148,6 @@ class _DetailsPanel extends StatelessWidget {
     return '${m.toStringAsFixed(0)} m';
   }
 
-  Future<void> _openRoute(BuildContext context) async {
-    final uri = Uri.parse(
-      'https://www.openstreetmap.org/directions?engine=osrm_car'
-      '&route=${scan.qr.geoLat},${scan.qr.geoLng};${scan.scanLat},${scan.scanLng}',
-    );
-    final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
-    if (!ok && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No se pudo abrir la ruta.')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -224,23 +210,7 @@ class _DetailsPanel extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () => _openRoute(context),
-              icon: const Icon(Icons.directions_rounded),
-              label: const Text('Ver ruta entre los puntos'),
-              style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFFE040FB),
-                side: const BorderSide(color: Color(0xFFE040FB)),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ),
+          
         ],
       ),
     );
