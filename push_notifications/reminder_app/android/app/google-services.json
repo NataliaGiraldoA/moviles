@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676665545823",
+    "project_id": "moviles-f36b9",
+    "storage_bucket": "moviles-f36b9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676665545823:android:dbd1416a07361aff5fb7ea",
+        "android_client_info": {
+          "package_name": "notifications_moviles.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLRgmW9a69-nl0R71_70SsInXvin4GySc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
