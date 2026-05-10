@@ -21,6 +21,10 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MoviesProvider(), lazy: false),
         ChangeNotifierProvider(create: (_) => AuthService(), lazy: false),
         ChangeNotifierProvider(create: (_) => HeroService(), lazy: false),
+        ChangeNotifierProvider(
+          create: (_) => QrStorageService()..load(),
+          lazy: false,
+        ),
       ],
       child: MyApp(),
     );
@@ -63,6 +67,10 @@ class MyApp extends StatelessWidget {
           create: (_) => HeroProvider(),
           child: const EditHeroScreen(),
         ),
+        'generateQr': (_) => const GenerateQrScreen(),
+        'scanQr': (_) => const ScanQrScreen(),
+        'qrMap': (_) => const QrMapScreen(),
+        'qrHistory': (_) => const QrHistoryScreen(),
       },
 
       theme: ThemeData.dark().copyWith(

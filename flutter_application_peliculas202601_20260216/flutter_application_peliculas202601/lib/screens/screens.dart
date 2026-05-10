@@ -8,3 +8,7 @@ export 'package:flutter_application_peliculas202601/screens/usuario_screen.dart'
 export 'package:flutter_application_peliculas202601/screens/heroes_screen.dart';
 export 'package:flutter_application_peliculas202601/screens/create_heros_screen.dart';
 export 'package:flutter_application_peliculas202601/screens/edit_hero_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/generate_qr_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/scan_qr_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/qr_map_screen.dart';
+export 'package:flutter_application_peliculas202601/screens/qr_history_screen.dart';

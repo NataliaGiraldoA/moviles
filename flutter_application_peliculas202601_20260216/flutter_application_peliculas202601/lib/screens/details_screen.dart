@@ -14,6 +14,17 @@ class DetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: const Color(0xFFE040FB),
+        foregroundColor: Colors.white,
+        icon: const Icon(Icons.qr_code_2_rounded),
+        label: const Text('Recomendar con QR'),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          'generateQr',
+          arguments: movie,
+        ),
+      ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
